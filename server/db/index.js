@@ -15,14 +15,13 @@ const connection = mysql.createConnection({
   database: 'chat'
 });
 
-// USE THIS FOR MODEL MESSAGES
-// simple query
-/*
+// This query gets all messages (gets used in models/messages)
 connection.query(
-  'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
+  'SELECT * FROM `messages`',
   function(err, results, fields) {
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    console.log('results:', results); // results contains rows returned by server
+    console.log('fields:', fields); // fields contains extra meta data about results, if available
   }
 );
-*/
+
+module.exports.getAll = connection.query;
