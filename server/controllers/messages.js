@@ -1,25 +1,23 @@
 var models = require('../models');
-var express = require('express');
+// var express = require('express');
 
 //using models functions
 
 module.exports = {
   get: function (req, res) {
-    console.log('req:', req);
-    console.log('res:', res);
-    res.send(models.messages.getAll('messages'));
+    // console.log('req.body:', req.body);
+    // console.log('please be string:', models.messages.getAll());
+    models.messages.getAll((err, results)=>{
+      if (err) { throw err; }
+      else {
+        let data = JSON.stringify(results);
+        res.send(data);
+      }
+    });
   }, // a function which handles a get request for all messages, just needs some basic error handling
-  post: function (req, res) {} // a function which handles posting a message to the database sends post request to models
+  post: function (req, res) {
+    console.log(req.body);
+    models.messages.create(req.body.username, req.body.message, req.body.roomname, 1);
+    res.end();
+  } // a function which handles posting a message to the database sends post request to models
 };
-
-
-// app.get("/page/:id",function(request, response){
-//   var id = request.params.id;
-//   // do something with id
-//   // send a response to user based on id
-//   var obj = { id : id, Content : "content " +id };
-
-//   response.writeHead(200, {"Content-Type": "application/json"});
-//   response.write(JSON.stringify(obj));
-// });
-

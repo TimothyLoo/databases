@@ -4,17 +4,16 @@ var db = require('../db');
 
 module.exports = {
   // a function which produces all the messages
-  getAll: function (resultFromContr) { // messages
-    let sqlQuery = 'SELECT * FROM ' + resultFromContr;
-    console.log('sqlQuery:', sqlQuery);
-    db.query(sqlQuery, (err, results)=>{
-      if (err) {
-        throw new Error ('This is a models error');
-      } else {
-        console.log (results);
-      }
+  getAll: function (callback) { // messages
+    db.connection.query('SELECT * FROM `messages`', [], (err, results)=>{
+      console.log(results);
+      callback(err, results);
     });
   },
 
-  create: function () { /*INSERT INTO messages (...columns) VALUES (...rows)*/ } // a function which can be used to insert a message into the database
+  create: function (username, text, roomname, idUsers) {
+    db.connection.query('INSERT INTO `messages` (`username`, `text`, `roomname`, `id_users`) VALUES (?, ?, ?, ?)',
+      [username, text, roomname, idUsers]
+    );
+  } // a function which can be used to insert a message into the database
 };

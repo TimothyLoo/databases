@@ -28,7 +28,7 @@ CREATE TABLE `messages` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL DEFAULT 'NULL',
   `text` VARCHAR(255) NULL DEFAULT NULL,
-  `timestamp` TIMESTAMP NOT NULL,
+  `roomname` VARCHAR(255) NOT NULL,
   `id_users` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
 /*,KEY ()*/
@@ -52,7 +52,7 @@ CREATE TABLE `users` (
 -- Foreign Keys
 -- ---
 
-ALTER TABLE `messages` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+-- ALTER TABLE `messages` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
 
 -- ---
 -- Table Properties
