@@ -15,13 +15,24 @@ const connection = mysql.createConnection({
   database: 'chat'
 });
 
-// This query gets all messages (gets used in models/messages)
-connection.query(
-  'SELECT * FROM `messages`',
-  function(err, results, fields) {
-    console.log('results:', results); // results contains rows returned by server
-    console.log('fields:', fields); // fields contains extra meta data about results, if available
-  }
-);
+connection.connect((err)=>{
+  if (err) { throw new Error ('This is a connection error'); }
+});
 
-module.exports.getAll = connection.query;
+//move this to models
+// This query gets all messages (gets used in models/messages)
+// connection.query(SELECT * from messages);
+//   function(err, results, fields) {
+//     console.log('fields:', fields); // fields contains extra meta data about results, if available
+//     console.log('results:', results); // results contains rows returned by server
+//   }
+// );
+module.exports = connection;
+// // This query gets all messages (gets used in models/messages)
+// connection.query(
+//   'SELECT * FROM `messages`',
+//   function(err, results, fields) {
+//     console.log('fields:', fields); // fields contains extra meta data about results, if available
+//     console.log('results:', results); // results contains rows returned by server
+//   }
+// );
