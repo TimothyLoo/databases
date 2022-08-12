@@ -5,8 +5,8 @@ var models = require('../models');
 
 module.exports = {
   get: function (req, res) {
-    // console.log('req.body:', req.body);
-    // console.log('please be string:', models.messages.getAll());
+    console.log('req.body:', req.body);
+    console.log('please be string:', models.messages.getAll());
     models.messages.getAll((err, results)=>{
       if (err) { throw err; }
       else {
